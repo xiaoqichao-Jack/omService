@@ -43,6 +43,7 @@ public class Functions {
             String  executionResult = receiverMessage(socket);
             //System.out.println("接收消息之后 socket状态 " + socket.isClosed());
             System.out.println(executionResult);
+            socket.close();
         }
     }
 
@@ -61,8 +62,32 @@ public class Functions {
             //System.out.println("发送数据 执行指令");
             Instruction inst = new Instruction();
             inst.downloadConfigFile(socket);
+            socket.close();
  //       }
     }
+
+    public void shutDownAgentService() throws Exception{
+        Socket socket = SocketUtil.getInstance().getSocket();
+        //发送消息
+        int instruction = SpecifyCollection.SHUTDOWN_AGENT.getValue();
+        writeMessage(getMessage(instruction),socket);
+        //接收消息
+
+        //断开连接
+        socket.close();
+    }
+
+    public void startUpAgentService() throws Exception{
+        Socket socket = SocketUtil.getInstance().getSocket();
+        //发送消息
+        int instruction = SpecifyCollection.STARTUP_AGENT.getValue();
+        writeMessage(getMessage(instruction),socket);
+        //接收消息
+
+        //断开连接
+        socket.close();
+    }
+
 
     public void updateAgentConfig() throws Exception{
         Socket socket = SocketUtil.getInstance().getSocket();

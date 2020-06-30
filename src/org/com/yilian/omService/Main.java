@@ -33,10 +33,10 @@ public class Main {
                 fun.updateAgentConfig();
                 break; //可选
             case 4 :
-
+                fun.shutDownAgentService();
                 break; //可选
             case 5 :
-
+                fun.startUpAgentService();
                 break; //可选
             case 6 :
 
